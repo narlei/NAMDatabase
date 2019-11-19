@@ -39,11 +39,18 @@
     @try {
         if (_database) {
             if (![_database close]) {
-                NSLog(@"Erro fechando DB");
+                NSLog(@"Error closing DB");
             }
         }
     } @catch (NSException *exception) {
-        NSLog(@"Erro fechando DB");
+        NSLog(@"Error closing DB");
+    }
+}
+
+- (void)initialize:(BOOL)printPath {
+    [self _initializeDatabase];
+    if (printPath) {
+        NSLog(@"Database Path %@", self.databasePath);
     }
 }
 
@@ -52,39 +59,16 @@
         return;
     }
 
-    if (![self _createDataBase]) {
-        return;
-    }
+    BOOL isCreated = [[NSFileManager defaultManager] fileExistsAtPath:self.databasePath];
 
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.databasePath]) {
-        _database = [FMDatabase databaseWithPath:self.databasePath];
-        [_database setLogsErrors:YES];
-        [_database setTraceExecution:NO];
-        [_database setShouldCacheStatements:YES];
-    }
-}
+    _database = [FMDatabase databaseWithPath:self.databasePath];
+    [_database setLogsErrors:YES];
+    [_database setTraceExecution:NO];
+    [_database setShouldCacheStatements:YES];
 
-- (BOOL)_createDataBase {
-    BOOL success;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *databasePath = [self databasePath];
-    success = [fileManager fileExistsAtPath:databasePath];
-    if (success) {
-        NSLog(@"Already Exists: %@", databasePath);
-        //        [self updateDatabase];
-        return YES;
-    } else {
-        NSLog(@"Not Exists");
-        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"database.sqlite"];
-        if ([fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil]) {
-            NSLog(@"Copied Succefull %@", databasePath);
-            return YES;
-        } else {
-            NSLog(@"Error Copying");
-            return NO;
-        }
+    if (!isCreated) {
+        [self createAllTables];
     }
-    return NO;
 }
 
 - (NSString *)databasePath {
@@ -100,7 +84,6 @@
     FMResultSet *rs;
     if ([self.database goodConnection]) {
         rs = [self.database executeQuery:query];
-    } else {
     }
 
     return rs;
@@ -136,7 +119,6 @@
             Class c = classes[i];
             NSBundle *b = [NSBundle bundleForClass:c];
             if (b == [NSBundle mainBundle] && [c isSubclassOfClass:[NAMObjectModel class]]) {
-                NSLog(@"%s", class_getName(c));
                 NSString *sqlCreate = [c sqlGenerateTable];
                 [[NAMDatabase sharedNAMDatabase] executeStatements:sqlCreate];
             }

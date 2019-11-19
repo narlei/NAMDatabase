@@ -14,8 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        NAMDatabase.shared()?.createAllTables()
-
+        
+        NAMDatabase.shared()?.initialize()
+        
         return true
     }
 

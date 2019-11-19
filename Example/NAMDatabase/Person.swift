@@ -10,4 +10,8 @@ import NAMDatabase
 
 class Person: NAMObjectModel {
     @objc var name: String!
+    
+    override class func primaryKeys() -> [Any]! {
+        return ["identifier"]
+    }
 }

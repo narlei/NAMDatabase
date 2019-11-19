@@ -22,6 +22,11 @@
 + (instancetype)sharedNAMDatabase;
 
 /**
+*  Initialize the NAMDatabase, call in AppDelegate
+*/
+- (void) initialize;
+
+/**
  *  Database Path, default: Documents/database.sqlite
  */
 @property (nonatomic, strong) NSString *databasePath;
