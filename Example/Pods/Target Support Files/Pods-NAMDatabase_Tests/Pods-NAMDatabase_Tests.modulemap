@@ -1,0 +1,6 @@
+framework module Pods_NAMDatabase_Tests {
+  umbrella header "Pods-NAMDatabase_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

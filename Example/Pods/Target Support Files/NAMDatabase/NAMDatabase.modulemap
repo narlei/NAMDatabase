@@ -1,0 +1,6 @@
+framework module NAMDatabase {
+  umbrella header "NAMDatabase-umbrella.h"
+
+  export *
+  module * { export * }
+}

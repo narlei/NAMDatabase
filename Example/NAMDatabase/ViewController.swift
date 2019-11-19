@@ -9,16 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Save Data
+        let person = Person()
+        let id = person.getUniqueKey()
+        person.name = "Narlei"
+        person.identifier = id
+        person.saveData()
+
+        // Retrieve Data
+        if let personResult = Person.getObjectWithId(id) as? Person {
+            print(personResult.name)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
 }
-

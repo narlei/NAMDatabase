@@ -1,0 +1,25 @@
+PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - NAMDatabase (0.1.0):
+    - FMDB (~> 2.7.5)
+
+DEPENDENCIES:
+  - NAMDatabase (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+
+EXTERNAL SOURCES:
+  NAMDatabase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  NAMDatabase: c3a03cac2c228dd78873013c15518ac12c30dffb
+
+PODFILE CHECKSUM: cb1ead322c2e1007f35e203073bc2a764d52e1ee
+
+COCOAPODS: 1.8.4

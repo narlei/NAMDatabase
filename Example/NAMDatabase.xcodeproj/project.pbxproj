@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9CCB4B8123843F2700F5906D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCB4B8023843F2700F5906D /* Person.swift */; };
 		B7DEBE26536E9B2E4F2406F0 /* Pods_NAMDatabase_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DFD593F37F3068229ED96E /* Pods_NAMDatabase_Tests.framework */; };
 		F555F3C070FF4EB248F34B43 /* Pods_NAMDatabase_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0056425D20F52B9F81DCB630 /* Pods_NAMDatabase_Example.framework */; };
 /* End PBXBuildFile section */
@@ -29,8 +30,8 @@
 
 /* Begin PBXFileReference section */
 		0056425D20F52B9F81DCB630 /* Pods_NAMDatabase_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NAMDatabase_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		045D5C6198EF5CDAB447FDDA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		06F838C0388A306DB9C392E7 /* NAMDatabase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = NAMDatabase.podspec; path = ../NAMDatabase.podspec; sourceTree = "<group>"; };
+		045D5C6198EF5CDAB447FDDA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		06F838C0388A306DB9C392E7 /* NAMDatabase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NAMDatabase.podspec; path = ../NAMDatabase.podspec; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* NAMDatabase_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NAMDatabase_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,10 +43,11 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		711BC0C88BABD482ADB70023 /* Pods-NAMDatabase_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAMDatabase_Tests.debug.xcconfig"; path = "Target Support Files/Pods-NAMDatabase_Tests/Pods-NAMDatabase_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9CCB4B8023843F2700F5906D /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A8CCC6711D08C35DF4F3A687 /* Pods-NAMDatabase_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAMDatabase_Example.debug.xcconfig"; path = "Target Support Files/Pods-NAMDatabase_Example/Pods-NAMDatabase_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C4DFD593F37F3068229ED96E /* Pods_NAMDatabase_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NAMDatabase_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD1EBD1FB87D56F2A9B7C102 /* Pods-NAMDatabase_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAMDatabase_Example.release.xcconfig"; path = "Target Support Files/Pods-NAMDatabase_Example/Pods-NAMDatabase_Example.release.xcconfig"; sourceTree = "<group>"; };
-		CE56EB011C164D778180116D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		CE56EB011C164D778180116D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D852C8C1ADD7A870EDF0F0CF /* Pods-NAMDatabase_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAMDatabase_Tests.release.xcconfig"; path = "Target Support Files/Pods-NAMDatabase_Tests/Pods-NAMDatabase_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				9CCB4B8023843F2700F5906D /* Person.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -156,7 +159,6 @@
 				711BC0C88BABD482ADB70023 /* Pods-NAMDatabase_Tests.debug.xcconfig */,
 				D852C8C1ADD7A870EDF0F0CF /* Pods-NAMDatabase_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +229,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -313,10 +316,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-NAMDatabase_Example/Pods-NAMDatabase_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/NAMDatabase/NAMDatabase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NAMDatabase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCB4B8123843F2700F5906D /* Person.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
