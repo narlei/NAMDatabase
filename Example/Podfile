@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NAMDatabase_Example' do
+  pod 'NAMDatabase', :path => '../'
+
+  target 'NAMDatabase_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
