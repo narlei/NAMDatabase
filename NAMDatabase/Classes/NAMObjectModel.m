@@ -22,7 +22,6 @@
     NSArray *arrayKeys = [pDicDatabase allKeys];
     id object = [[self.class alloc] init];
     for (NSString *key in arrayKeys) {
-
         if ([object respondsToSelector:NSSelectorFromString([NSString stringWithFormat:@"%@", key])]) {
             @try {
                 if ([pDicDatabase objectForKey:key] && !([[pDicDatabase objectForKey:key] isKindOfClass:[NSNull class]])) {
@@ -51,7 +50,6 @@
 
 #pragma mark Retrieve de Dados
 
-
 // Get Espefific Object
 + (NSDictionary *)getObjectFromTable:(NSString *)pTableName idKey:(NSString *)pIdKey withId:(id)pID returnParsed:(BOOL)pParsed {
     NSString *sqlSelect = [NSString stringWithFormat:@"SELECT * FROM \"%@\" WHERE %@ = %@", pTableName, pIdKey, pID];
@@ -73,14 +71,12 @@
 
 // Get All Objects
 + (NSArray *)getAllObjectsFromTable:(NSString *)pTableName where:(NSString *)pWhere returnParsed:(BOOL)pParsed {
-
     NSString *sqlSelect = [NSString stringWithFormat:@"SELECT * FROM \"%@\" WHERE %@ ", pTableName, pWhere];
 
     return [self getAllObjectsWithSQl:sqlSelect returnParsed:pParsed];
 }
 
 + (NSArray *)getAllObjectsWithSQl:(NSString *)pSql returnParsed:(BOOL)pParsed {
-
     FMResultSet *rs = [[NAMDatabase sharedNAMDatabase] executeQuery:pSql];
     NSMutableArray *arrayReturn = [NSMutableArray new];
     @try {
@@ -106,7 +102,6 @@
     return [self getObjectFromTable:[self tableName] idKey:@"identifier" withId:[NSString stringWithFormat:@"'%@'", key] returnParsed:YES];
 }
 
-
 + (NSArray *)getAllDataWhere:(NSString *)pWhere {
     return [self getAllObjectsFromTable:[self tableName] where:pWhere returnParsed:YES];
 }
@@ -118,12 +113,11 @@
     [self saveDataWithValues:dicData
                      inTable:[self.class tableName]
                   onComplete:^(FMDatabase *database) {
-                  }];
+    }];
 }
 
 // Create/Update
 - (void)saveDataWithValues:(NSDictionary *)dicParameters inTable:(NSString *)pTableName onComplete:(void (^)(FMDatabase *database))onComplete {
-
     NSString *stringInsertFields = @"";
     for (NSString *key in [dicParameters allKeys]) {
         stringInsertFields = [NSString stringWithFormat:@"%@, \"%@\"", stringInsertFields, key];
@@ -135,6 +129,8 @@
     stringInsertFields = [stringInsertFields substringFromIndex:1];
     stringInsertValues = [stringInsertValues substringFromIndex:1];
 
+    [[NAMDatabase sharedNAMDatabase].database close];
+    
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[[NAMDatabase sharedNAMDatabase] databasePath]];
     [queue inDatabase:^(FMDatabase *db) {
         BOOL ok = [db executeUpdate:[NSString stringWithFormat:@"INSERT OR REPLACE INTO \"%@\" (%@) VALUES (%@)", pTableName, stringInsertFields, stringInsertValues] withParameterDictionary:dicParameters];
@@ -143,6 +139,7 @@
         } else {
             onComplete(db);
         }
+        [db close];
     }];
 }
 
@@ -158,7 +155,6 @@
 }
 
 - (void)deleteDataWithValues:(NSDictionary *)dicParameters inTable:(NSString *)pTableName onComplete:(void (^)(FMDatabase *database))onComplete {
-
     NSString *stringInsertFields = @"";
     for (NSString *key in [dicParameters allKeys]) {
         stringInsertFields = [NSString stringWithFormat:@"%@, %@", stringInsertFields, key];
@@ -208,7 +204,6 @@
 #pragma mark Data Utils
 
 - (NSDictionary *)dictionaryData {
-
     NSMutableDictionary *dicAllValues = [NSMutableDictionary new];
     NSDictionary *dicProperties = [self classPropsForClassHierarchy:[self class] onDictionary:[NSMutableDictionary new]];
 
@@ -233,10 +228,10 @@
 
 - (NSString *)getUniqueKey {
     CFUUIDRef uuidObj = CFUUIDCreate(nil); // create a new UUID
-    NSString *uuidString = (NSString *) CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
-    float rndValue = (((float) arc4random() / 0x100000000) * (10000000 - 0) + 0);
+    NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
+    float rndValue = (((float)arc4random() / 0x100000000) * (10000000 - 0) + 0);
     NSString *uuidStringEncripted = [NAMEncrypt sha256:[NSString stringWithFormat:@"%@%f", uuidString, rndValue]];
-    float rndValue2 = (((float) arc4random() / 0x100000000) * (100099999990000 - 99) + 99);
+    float rndValue2 = (((float)arc4random() / 0x100000000) * (100099999990000 - 99) + 99);
     NSString *uniqueKey = [NAMEncrypt sha256:[NSString stringWithFormat:@"%@%@%@%f", uuidString, [NSDate date], uuidStringEncripted, rndValue2]];
 
     uniqueKey = [uniqueKey uppercaseString];
@@ -252,7 +247,7 @@
 
     NSString *sqlCommand = [NSString stringWithFormat:@"DROP TABLE IF EXISTS `%@`;\n CREATE TABLE `%@` (", [self tableName], [self tableName]];
     NSString *sqlFields = @"";
-    NSDictionary *dicTypes = @{@"NSString": @"TEXT", @"NSNumber": @"NUMERIC"};
+    NSDictionary *dicTypes = @{ @"NSString": @"TEXT", @"NSNumber": @"NUMERIC" };
 
     for (NSString *key in arrayKeys) {
         NSString *valueType = [dicProperties objectForKey:key];
@@ -286,7 +281,6 @@
 #pragma mark - Properties Helper
 
 - (NSDictionary *)classPropsForClassHierarchy:(Class)klass onDictionary:(NSMutableDictionary *)results {
-
     if (klass == NULL) {
         return nil;
     }
@@ -314,7 +308,8 @@
     }
 }
 
-static const char *getPropertyType(objc_property_t property) {
+static const char * getPropertyType(objc_property_t property)
+{
     const char *attributes = property_getAttributes(property);
     // printf("attributes=%s\n", attributes);
     char buffer[1 + strlen(attributes)];
@@ -331,14 +326,14 @@ static const char *getPropertyType(objc_property_t property) {
              unsigned "I", struct, etc.
              */
             NSString *name = [[NSString alloc] initWithBytes:attribute + 1 length:strlen(attribute) - 1 encoding:NSASCIIStringEncoding];
-            return (const char *) [name cStringUsingEncoding:NSASCIIStringEncoding];
+            return (const char *)[name cStringUsingEncoding:NSASCIIStringEncoding];
         } else if (attribute[0] == 'T' && attribute[1] == '@' && strlen(attribute) == 2) {
             // it's an ObjC id type:
             return "id";
         } else if (attribute[0] == 'T' && attribute[1] == '@') {
             // it's another ObjC object type:
             NSString *name = [[NSString alloc] initWithBytes:attribute + 3 length:strlen(attribute) - 4 encoding:NSASCIIStringEncoding];
-            return (const char *) [name cStringUsingEncoding:NSASCIIStringEncoding];
+            return (const char *)[name cStringUsingEncoding:NSASCIIStringEncoding];
         }
     }
     return "";

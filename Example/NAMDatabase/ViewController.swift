@@ -19,11 +19,12 @@ class ViewController: UIViewController {
         person.identifier = id
         person.saveData()
 
-        // Retrieve Data
+        // Retrieve Data by ID
         if let personResult = Person.getObjectWithId(id) as? Person {
             print(personResult.name)
         }
-        
+
+        // Retrieve Data by SQLite where
         if let array = Person.getAllDataWhere("name like 'Nar%'") as? [Person] {
             print(array)
         }

@@ -23,15 +23,22 @@ class Person: NAMObjectModel {
 }
 ````
 
-### Creating tables:
+### Initialize 
+
+This code will create the Database and all Tables.
 
 In your AppDelegate add:
+
+````Swift
+NAMDatabase.shared()?.initialize()
+````
+If you need recreate the tables run:
 
 ````Swift
 NAMDatabase.shared()?.createAllTables()
 ````
 
-This code will drop and create the database, execute only in first execution of app. 
+This code will drop and recreate the database, be carrefully. 
 
 ### Saving Data:
 
@@ -39,6 +46,16 @@ This code will drop and create the database, execute only in first execution of 
 let person = Person()
 person.name = "Narlei"
 person.identifier = "MY_ID"
+person.saveData()
+````
+If a register with id == "MY_ID" already exists, will be updated.
+
+To get a unique ID you can use:
+
+````Swift
+let person = Person()
+let id = person.getUniqueKey()
+person.identifier = id
 person.saveData()
 ````
 
@@ -56,6 +73,27 @@ if let array = Person.getAllDataWhere("name like 'Nar%'") as? [Person] {
 }
 ````
 
+### Ignored Properties
+
+In Swift classes, if you want to ignore properties, just not add `@objc` or you can use:
+
+````Swift 
+override class func ignoredProperties() -> [Any]! {
+    return ["name"]
+}
+
+````
+
+### Primary Key
+
+A default property `identifier` is the primary key, you can change it using:
+
+````Swift 
+override class func primaryKeys() -> [Any]! {
+	return ["id"]
+}
+````
+
 
 ## Installation
 
@@ -68,8 +106,8 @@ pod 'NAMDatabase'
 
 ## TODO
 
-- Create Database automatically in first app execution
-- Create template to create Models
+- Create template to create Models;
+- Database migration Helper;
 
 
 ## Author
@@ -79,3 +117,7 @@ narlei, narlei.guitar@gmail.com
 ## License
 
 NAMDatabase is available under the MIT license. See the LICENSE file for more info.
+
+## Pay me a coffee:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=NMQM9R9GLZQXC&lc=BR&item_name=Narlei%20Moreira&item_number=development%2fdesign&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
