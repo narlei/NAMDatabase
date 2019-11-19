@@ -23,6 +23,10 @@ class ViewController: UIViewController {
         if let personResult = Person.getObjectWithId(id) as? Person {
             print(personResult.name)
         }
+        
+        if let array = Person.getAllDataWhere("name like 'Nar%'") as? [Person] {
+            print(array)
+        }
     }
 
     override func didReceiveMemoryWarning() {
