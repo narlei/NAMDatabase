@@ -74,7 +74,7 @@
 // Get All Objects
 + (NSArray *)getAllObjectsFromTable:(NSString *)pTableName where:(NSString *)pWhere returnParsed:(BOOL)pParsed {
 
-    NSString *sqlSelect = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ ", pTableName, pWhere];
+    NSString *sqlSelect = [NSString stringWithFormat:@"SELECT * FROM \"%@\" WHERE %@ ", pTableName, pWhere];
 
     return [self getAllObjectsWithSQl:sqlSelect returnParsed:pParsed];
 }
