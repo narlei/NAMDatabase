@@ -123,15 +123,13 @@
 }
 
 - (void)createAllTables {
-    
     int numClasses;
-    Class * classes = NULL;
+    Class *classes = NULL;
 
     classes = NULL;
     numClasses = objc_getClassList(NULL, 0);
 
-    if (numClasses > 0 )
-    {
+    if (numClasses > 0) {
         classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
         numClasses = objc_getClassList(classes, numClasses);
         for (int i = 0; i < numClasses; i++) {
@@ -144,17 +142,6 @@
             }
         }
         free(classes);
-    }
-    return ;
-    
-    NSArray *array = (NSArray *)[self loadJsonFromBundle:@"NAMDatabaseClasses.nam" firstKey:nil];
-    for (NSString *className in array) {
-        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-        NSString *classStringName = [NSString stringWithFormat:@"_TtC%d%@%d%@", appName.length, appName, className.length, className];
-
-        Class cl = NSClassFromString(classStringName);
-        NSString *sqlCreate = [cl sqlGenerateTable];
-        [[NAMDatabase sharedNAMDatabase] executeStatements:sqlCreate];
     }
 }
 
