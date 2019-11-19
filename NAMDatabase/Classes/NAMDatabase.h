@@ -23,8 +23,9 @@
 
 /**
 *  Initialize the NAMDatabase, call in AppDelegate
+*  @param printPath Print the SQLite database path to debug in simulator
 */
-- (void) initialize;
+- (void)initialize:(BOOL)printPath;
 
 /**
  *  Database Path, default: Documents/database.sqlite

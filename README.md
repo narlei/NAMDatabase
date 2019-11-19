@@ -30,8 +30,12 @@ This code will create the Database and all Tables.
 In your AppDelegate add:
 
 ````Swift
-NAMDatabase.shared()?.initialize()
+NAMDatabase.shared()?.initialize(true)
 ````
+Send true to log the Database Path.
+
+
+
 If you need recreate the tables run:
 
 ````Swift
@@ -71,6 +75,21 @@ if let personResult = Person.getObjectWithId("MY_ID") as? Person {
 if let array = Person.getAllDataWhere("name like 'Nar%'") as? [Person] {
 	print(array)
 }
+````
+
+### Delete Data
+
+Delete by Identifier:
+
+````Swift
+Person.deleteObject(withId: "MY_ID")
+
+````
+
+Delete with SQLite where:
+
+````Swift
+Person.deleteAllDataWhere("name like 'Nar%'")
 ````
 
 ### Ignored Properties

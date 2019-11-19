@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 /**
  *  This class is a base model based in ORM.
  *  You can create all properties and the class will manage Database.
@@ -19,12 +18,11 @@
 /**
  *  Default Primari Key, can be changed using the method `+ (NSArray *)primaryKeys`
  */
-@property(nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSString *identifier;
 
 #pragma mark - Database
 
 #pragma mark DDL
-
 
 /**
  * Generate table based on Class. Exemple: [Person sqlGenerateTable];
@@ -60,14 +58,40 @@
  */
 + (NSArray *)primaryKeys;
 
+#pragma mark - Retrieve Data
 
-#pragma mark - Retrieve de Dados
-
+/**
+*  Get an Object with identifier
+*
+*  @param key The identifier to filter
+*
+*  @return Object
+*/
 + (id)getObjectWithId:(id)key;
 
+/**
+*  Get an  array of Objects
+*
+*  @param pWhere The SQLite where
+*
+*  @return Array of Objects
+*/
 + (NSArray *)getAllDataWhere:(NSString *)pWhere;
 
-// TODO: Implement Delete Data
+#pragma mark - Delete Data
 
+/**
+*  Delete an Object with identifier
+*
+*  @param key The identifier to filter
+*/
++ (void)deleteObjectWithId:(id)key;
+
+/**
+*  Delete an Object with identifier
+*
+*  @param pWhere The SQLite where
+*/
++ (void)deleteAllDataWhere:(NSString *)pWhere;
 
 @end
