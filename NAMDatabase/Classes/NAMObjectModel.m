@@ -130,7 +130,7 @@
     stringInsertValues = [stringInsertValues substringFromIndex:1];
 
     [[NAMDatabase sharedNAMDatabase].database close];
-    
+
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[[NAMDatabase sharedNAMDatabase] databasePath]];
     [queue inDatabase:^(FMDatabase *db) {
         BOOL ok = [db executeUpdate:[NSString stringWithFormat:@"INSERT OR REPLACE INTO \"%@\" (%@) VALUES (%@)", pTableName, stringInsertFields, stringInsertValues] withParameterDictionary:dicParameters];
@@ -144,10 +144,21 @@
 }
 
 // Deleta
+
++ (void)deleteObjectWithId:(id)key {
+    NSString *pWhere = [NSString stringWithFormat:@"identifier = '%@'", key];
+    [self deleteDataFromTable:[self tableName] where:pWhere];
+}
+
++ (void)deleteAllDataWhere:(NSString *)pWhere {
+    [self deleteDataFromTable:[self tableName] where:pWhere];
+}
+
 + (void)deleteDataFromTable:(NSString *)pTable where:(NSString *)pWhere {
+    [[NAMDatabase sharedNAMDatabase].database close];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[[NAMDatabase sharedNAMDatabase] databasePath]];
     [queue inDatabase:^(FMDatabase *db) {
-        BOOL ok = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", pTable, pWhere]];
+        BOOL ok = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM \"%@\" WHERE %@", pTable, pWhere]];
         if (!ok) {
             NSLog(@"ERROR_DB %@", [db lastError]);
         }
@@ -166,6 +177,8 @@
     stringInsertFields = [stringInsertFields substringFromIndex:1];
     stringInsertValues = [stringInsertValues substringFromIndex:1];
 
+    [[NAMDatabase sharedNAMDatabase].database close];
+    
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[[NAMDatabase sharedNAMDatabase] databasePath]];
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"pragma table_info('%@')", pTableName]];
@@ -195,7 +208,7 @@
             countPk++;
         }
 
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", pTableName, where];
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM \"%@\" WHERE %@", pTableName, where];
         [db executeUpdate:sql];
         onComplete(db);
     }];
