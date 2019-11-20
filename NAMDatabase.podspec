@@ -8,25 +8,18 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NAMDatabase'
-  s.version          = '1.0.5'
+  s.version          = '1.0.6'
   s.summary          = 'A Sqlite ORM'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
   Based in Doctrine PHP ORM, this ORM bring to developers productivity and more powerful database management.
                        DESC
 
   s.homepage         = 'https://github.com/narlei/NAMDatabase'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'narlei' => 'narlei.guitar@gmail.com' }
   s.source           = { :git => 'https://github.com/narlei/NAMDatabase.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/narleimoreira'
 
   s.ios.deployment_target = '9.3'
 
