@@ -48,7 +48,7 @@ If you need recreate the tables run:
 NAMDatabase.shared()?.createAllTables()
 ````
 
-This code will drop and recreate the database, be carrefully. 
+This code will drop and recreate the database, be careful. 
 
 ### Saving Data:
 
