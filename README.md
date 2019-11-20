@@ -5,9 +5,15 @@
 [![Platform](https://img.shields.io/cocoapods/p/NAMDatabase.svg?style=flat)](https://cocoapods.org/pods/NAMDatabase)
 [![Twitter](https://img.shields.io/badge/twitter-@narleimoreira-blue.svg?style=flat)](https://twitter.com/narleimoreira)
 
-## Example
+## About
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+NAMDatabase is a very simple way to use SQLite. Forget parsers, selects, updates! Just `.saveData()` or `.delete()` for example. 
+
+The Core of solution is the **NAMObjectModel** class. It abstract all sql commands.
+
+When you initialize the library for the first time, NAMDatabase creates a .sqlite database and all the tables based in classes that implement **NAMObjectModel**.
+
+
 
 ## How it works
 
@@ -122,6 +128,12 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'NAMDatabase'
 ```
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+See the examples [here](https://github.com/narlei/NAMDatabase/blob/master/Example/NAMDatabase/ViewController.swift)
 
 ## TODO
 

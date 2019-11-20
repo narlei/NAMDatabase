@@ -145,6 +145,11 @@
 
 // Deleta
 
+- (void)deleteData {
+    NSString *pWhere = [NSString stringWithFormat:@"identifier = '%@'", self.identifier];
+    [self.class deleteDataFromTable:[self.class tableName] where:pWhere];
+}
+
 + (void)deleteObjectWithId:(id)key {
     NSString *pWhere = [NSString stringWithFormat:@"identifier = '%@'", key];
     [self deleteDataFromTable:[self tableName] where:pWhere];
@@ -178,7 +183,7 @@
     stringInsertValues = [stringInsertValues substringFromIndex:1];
 
     [[NAMDatabase sharedNAMDatabase].database close];
-    
+
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[[NAMDatabase sharedNAMDatabase] databasePath]];
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"pragma table_info('%@')", pTableName]];

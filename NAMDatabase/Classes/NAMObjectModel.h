@@ -81,6 +81,11 @@
 #pragma mark - Delete Data
 
 /**
+*  Delete the current object from Database
+*/
+- (void)deleteData;
+
+/**
 *  Delete an Object with identifier
 *
 *  @param key The identifier to filter

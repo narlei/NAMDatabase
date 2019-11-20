@@ -38,17 +38,33 @@ class ViewController: UIViewController {
         } else {
             print("Deleted")
         }
-        
+
         // Recreate object
         person.saveData()
         // Verify if is Created
         if let personResult = Person.getObjectWithId(id) as? Person {
             print("Created againt \(String(describing: personResult.name))")
         }
-        
+
         // Delete Data by SQLite where
         Person.deleteAllDataWhere("name like 'Nar%'")
-        
+
+        // Verify if is Deleted
+        if let personResult = Person.getObjectWithId(id) as? Person {
+            print(personResult.name)
+        } else {
+            print("Deleted")
+        }
+
+        // Recreate object
+        person.saveData()
+        // Verify if is Created
+        if let personResult = Person.getObjectWithId(id) as? Person {
+            print("Created againt \(String(describing: personResult.name))")
+        }
+
+        // Delete current object
+        person.deleteData()
         // Verify if is Deleted
         if let personResult = Person.getObjectWithId(id) as? Person {
             print(personResult.name)
